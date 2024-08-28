@@ -11,7 +11,6 @@ export default defineNuxtPlugin((nuxtApp) => {
   // If on the client, recover the injected state
   if (process.client) {
     const state = window.__APOLLO_STATE__;
-    // console.log({ state });
     if (state) {
       cache.restore(state);
     }

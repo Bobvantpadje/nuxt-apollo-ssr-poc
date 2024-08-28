@@ -1,4 +1,6 @@
 <template>
+  <!-- <p>{{ JSON.stringify(pdpData) }}</p> -->
+  <!-- <p>{{ JSON.stringify(result) }}</p> -->
   <p>{{ JSON.stringify(data) }}</p>
 </template>
 
