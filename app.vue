@@ -1,9 +1,3 @@
-<template>
-  <!-- <p>{{ JSON.stringify(pdpData) }}</p> -->
-  <!-- <p>{{ JSON.stringify(result) }}</p> -->
-  <p>{{ JSON.stringify(data) }}</p>
-</template>
-
 <script lang="ts" setup>
 import { gql } from "@apollo/client/core";
 
@@ -16,7 +10,19 @@ const query = gql`
   }
 `;
 
-const variables = { limit: 7 };
+const variables = ref({ limit: 1 });
 
-const { data } = await useAsyncQuery(query, variables);
+const { data, refresh, status } = await useAsyncQuery(query, variables.value);
+
+const handleIncrement = () => {
+  variables.value.limit++;
+  refresh();
+};
 </script>
+
+<template>
+  <p v-show="status === 'pending'">loading</p>
+  <p>ships count: {{ data?.data.ships.length }}</p>
+  <p>{{ JSON.stringify(data) }}</p>
+  <button @click="handleIncrement">increment limit</button>
+</template>
